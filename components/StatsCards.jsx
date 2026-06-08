@@ -7,7 +7,7 @@ export default function StatsCards({ tasks }) {
   const completedTasks = tasks.filter((t) => t.completed).length;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <div className="flex flex-col gap-5">
       {/* Active Tasks */}
       <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-sm">
         <div className="absolute top-0 right-0 h-24 w-24 rounded-full bg-primary/10 blur-2xl" />

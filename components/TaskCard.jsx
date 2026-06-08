@@ -19,8 +19,12 @@ export default function TaskCard({
 
   return (
     <div
-      className={`bg-card border rounded-lg p-4 shadow-sm transition-all ${
-        isOverdue ? 'border-destructive/50 bg-destructive/5' : 'border-border'
+      className={`border rounded-lg p-4 shadow-sm transition-all duration-300 ${
+        task.completed
+          ? 'bg-muted/40 border-green-500/30 opacity-70'
+          : isOverdue
+          ? 'border-destructive/50 bg-destructive/5'
+          : 'bg-card border-border'
       }`}
     >
       <div className="flex items-start gap-3">
@@ -39,15 +43,10 @@ export default function TaskCard({
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
             <div className="flex-1">
-              <h3
-                className={`font-semibold transition-all ${
-                  task.completed
-                    ? 'text-muted-foreground line-through'
-                    : 'text-foreground'
-                }`}
-              >
+              <h3 className="font-semibold text-foreground">
                 {task.title}
               </h3>
+
               {task.description && (
                 <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
                   {task.description}
@@ -55,15 +54,24 @@ export default function TaskCard({
               )}
             </div>
 
-            {isOverdue && !task.completed && (
-              <span className="flex-shrink-0 bg-destructive/20 text-destructive text-xs font-medium px-2 py-1 rounded">
-                Overdue
+            {task.completed ? (
+              <span className="flex-shrink-0 bg-green-500/10 text-green-500 text-xs font-medium px-2 py-1 rounded-full">
+                Finished
               </span>
+            ) : (
+              isOverdue && (
+                <span className="flex-shrink-0 bg-destructive/20 text-destructive text-xs font-medium px-2 py-1 rounded">
+                  Overdue
+                </span>
+              )
             )}
           </div>
 
           <div className="flex items-center justify-between mt-3">
-            <span className="text-xs text-muted-foreground">{formattedDate}</span>
+            <span className="text-xs text-muted-foreground">
+              {formattedDate}
+            </span>
+
             <div className="flex gap-2">
               <button
                 onClick={() => onEdit(task)}
@@ -72,6 +80,7 @@ export default function TaskCard({
               >
                 <Edit2 size={16} />
               </button>
+
               <button
                 onClick={() => onDelete(task.id)}
                 className="p-1.5 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded transition-colors"
