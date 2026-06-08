@@ -1,3 +1,10 @@
+## Deployment Note
+
+Task data is stored in a local JSON file (`data/tasks.json`), which works well in a local development environment.
+
+When deployed on Vercel, file-system changes are not guaranteed to persist due to the serverless architecture. For a production-ready application, a persistent database such as MongoDB, PostgreSQL, or SQLite would be used instead.
+
+
 # Task Manager
 
 A full-stack Task Manager application built with Next.js 15, JavaScript, Tailwind CSS, and Next.js API Routes. The application allows users to create, edit, complete, search, filter, and delete tasks. Task data is persisted using a JSON file, ensuring tasks remain available across server restarts without requiring a database.
@@ -57,7 +64,7 @@ Add deployment URL here:
 Frontend:
 
 ```txt
-https://your-app.vercel.app
+https://track-manager-delta.vercel.app/
 ```
 
 ---
